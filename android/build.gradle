@@ -6,11 +6,16 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+        maven {url 'https://developer.huawei.com/repo/'}
+        maven { url "https://storage.flutter-io.cn" }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
-
+        classpath 'com.huawei.agconnect:agcp:1.2.1.301'
 //        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8' // 添加的部分
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.0'
 
@@ -22,6 +27,11 @@ rootProject.allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven {url 'https://developer.huawei.com/repo/'}
+        maven { url "https://storage.flutter-io.cn" }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     }
 }
 
@@ -43,15 +53,15 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-    sourceSets {
-        main {
-            // wfc kit start
-            jniLibs.srcDirs += ['libs', 'kit/libs']
-            res.srcDirs += ['kit/src/main/res', 'kit/src/main/res-av']
-            assets.srcDirs += ['kit/src/main/assets']
-            java.srcDirs += ['kit/src/main/java']
-        }
-    }
+//    sourceSets {
+//        main {
+//            // wfc kit start
+//            jniLibs.srcDirs += ['libs', 'kit/libs']
+//            res.srcDirs += ['kit/src/main/res', 'kit/src/main/res-av']
+//            assets.srcDirs += ['kit/src/main/assets']
+//            java.srcDirs += ['kit/src/main/java']
+//        }
+//    }
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
@@ -59,19 +69,19 @@ android {
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation fileTree(include: ['*.jar'], dir: 'kit/libs')
+//    implementation fileTree(include: ['*.jar'], dir: 'kit/libs')
 
-    implementation files('libs_aar/client.aar')
-    implementation files('libs_aar/emojilibrary.aar')
-    implementation files('libs_aar/imagepicker.aar')
-    implementation files('libs_aar/mars-core-release.aar')
-    implementation files('libs_aar/push.aar')
-    implementation files('libs_aar/avenginekit.aar')
+    api files('libs_aar/client.aar')
+    api files('libs_aar/emojilibrary.aar')
+    api files('libs_aar/imagepicker.aar')
+    api files('libs_aar/mars-core-release.aar')
+    api files('libs_aar/push.aar')
+    api files('libs_aar/avenginekit.aar')
 
     //kit
-    implementation files('libs/TencentLocationSDK_v4.9.7.12_r247861_161205_1104.jar')
-    implementation files('libs/TencentMapSDK_Raster_v_1.2.7_51ae0e7.jar')
-    implementation files('libs/TencentSearch1.1.3.jar')
+//    implementation files('libs/TencentLocationSDK_v4.9.7.12_r247861_161205_1104.jar')
+//    implementation files('libs/TencentMapSDK_Raster_v_1.2.7_51ae0e7.jar')
+//    implementation files('libs/TencentSearch1.1.3.jar')
 
 
     implementation 'com.meizu.flyme.internet:push-internal:3.4.2@aar'

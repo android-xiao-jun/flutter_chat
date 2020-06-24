@@ -4,6 +4,11 @@ buildscript {
         jcenter()
         mavenCentral()
         maven {url 'https://developer.huawei.com/repo/'}
+
+        maven { url "https://storage.flutter-io.cn" }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     }
 
     dependencies {
@@ -25,6 +30,11 @@ allprojects {
 
         maven { url 'https://jitpack.io' }
         maven { url 'https://dl.bintray.com/jenly/maven' }
+
+        maven { url "https://storage.flutter-io.cn" }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     }
     configurations {
         all {
