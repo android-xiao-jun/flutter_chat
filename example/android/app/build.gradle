@@ -47,7 +47,6 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-
     sourceSets {
         main {
             // wfc kit start
@@ -55,7 +54,34 @@ android {
             res.srcDirs += ['kit/src/main/res', 'kit/src/main/res-av']
             assets.srcDirs += ['kit/src/main/assets']
             java.srcDirs += ['kit/src/main/java']
+
+//            manifest.srcFile {
+//                /* 多个AndroidManifest拼接，
+//                修改AndroidManifest运行时及时更新，
+//                clean后不会自动创建，需手动sync，可能是因为分两步的问题*/
+//                def _manifests = ['src/main/AndroidManifest.xml', 'kit/src/main/AndroidManifest.xml']
+//                def main = file('src/main/AndroidManifest.xml')
+//                def targetFile = new File(getBuildDir(), "AndroidManifest.xml")
+//                if (!targetFile.getParentFile().exists()) {
+//                    targetFile.getParentFile().mkdirs()
+//                }
+//                def main_text = main.getText("utf-8")
+//                def appIndex = main_text.lastIndexOf("</application>")
+//                def targetContent = main_text.substring(0, appIndex)
+//                for (item in _manifests) {
+//                    def c = file(item).getText("utf-8")
+//                    def appTag = "<application>"
+//                    def ct = c.substring(c.indexOf(appTag) + appTag.length(), c.lastIndexOf("</application>"))
+//                    targetContent += ct
+//                }
+//                targetContent += main_text.substring(appIndex)
+//                targetFile.write(targetContent, "utf-8")
+//                return targetFile.getAbsolutePath()
+//            }
         }
+    }
+    lintOptions {
+        abortOnError false
     }
     compileOptions {
         sourceCompatibility 1.8

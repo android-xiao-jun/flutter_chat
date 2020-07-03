@@ -5,8 +5,10 @@ import android.content.Context;
 import android.os.Handler;
 
 import androidx.multidex.MultiDexApplication;
+import io.flutter.app.FlutterApplication;
+import io.flutter.view.FlutterMain;
 
-public class BaseApp extends MultiDexApplication {
+public class BaseApp extends FlutterApplication {
 
     //以下属性应用于整个应用程序，合理利用资源，减少资源浪费
     private static Context mContext;//上下文
