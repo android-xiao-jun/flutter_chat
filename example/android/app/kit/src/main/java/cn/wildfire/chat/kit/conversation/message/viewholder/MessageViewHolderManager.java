@@ -3,6 +3,7 @@ package cn.wildfire.chat.kit.conversation.message.viewholder;
 import android.util.Log;
 import android.util.SparseArray;
 
+import cn.wildfire.chat.app.test.RedMessageContentViewHolder;
 import cn.wildfire.chat.kit.annotation.LayoutRes;
 import cn.wildfire.chat.kit.annotation.MessageContentType;
 import cn.wildfire.chat.kit.annotation.ReceiveLayoutRes;
@@ -31,6 +32,8 @@ public class MessageViewHolderManager {
         registerMessageViewHolder(VoipMessageViewHolder.class);
         registerMessageViewHolder(SimpleNotificationMessageContentViewHolder.class);
         registerMessageViewHolder(RecallMessageContentViewHolder.class);
+
+        registerMessageViewHolder(RedMessageContentViewHolder.class);
     }
 
     private SparseArray<Class<? extends MessageContentViewHolder>> messageViewHolders = new SparseArray<>();

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import cn.wildfire.chat.app.Config;
 import cn.wildfire.chat.app.MyApp;
+import cn.wildfire.chat.app.test.RedMessageContent;
 import cn.wildfire.chat.app.third.location.data.LocationData;
 import cn.wildfire.chat.kit.audio.AudioPlayManager;
 import cn.wildfire.chat.kit.audio.IAudioPlayListener;
@@ -30,6 +31,7 @@ import cn.wildfirechat.message.MessageContent;
 import cn.wildfirechat.message.SoundMessageContent;
 import cn.wildfirechat.message.StickerMessageContent;
 import cn.wildfirechat.message.TextMessageContent;
+import cn.wildfirechat.message.TypingMessageContent;
 import cn.wildfirechat.message.VideoMessageContent;
 import cn.wildfirechat.message.core.MessageDirection;
 import cn.wildfirechat.message.core.MessageStatus;
@@ -45,6 +47,7 @@ import cn.wildfirechat.remote.OnMessageUpdateListener;
 import cn.wildfirechat.remote.OnRecallMessageListener;
 import cn.wildfirechat.remote.OnReceiveMessageListener;
 import cn.wildfirechat.remote.OnSendMessageListener;
+import cn.wildfirechat.remote.SendMessageCallback;
 
 public class MessageViewModel extends ViewModel implements OnReceiveMessageListener,
     OnSendMessageListener,
@@ -241,6 +244,29 @@ public class MessageViewModel extends ViewModel implements OnReceiveMessageListe
         // the call back would be called on the ui thread
         message.sender = ChatManager.Instance().getUserId();
         ChatManager.Instance().sendMessage(message, null);
+    }
+
+    public void sendMessageCall(Conversation conversation, MessageContent content) {
+        Message msg = new Message();
+        msg.conversation = conversation;
+        msg.content = content;
+        msg.sender = ChatManager.Instance().getUserId();
+        ChatManager.Instance().sendMessage(msg, new SendMessageCallback() {
+            @Override
+            public void onSuccess(long l, long l1) {
+                Log.e("sendMessage","_onSuccess_l_"+l+"_l1_"+l1);
+            }
+
+            @Override
+            public void onFail(int i) {
+                Log.e("sendMessage","_onFail_i_"+i);
+            }
+
+            @Override
+            public void onPrepare(long l, long l1) {
+                Log.e("sendMessage","_onPrepare__l_"+l+"_l1_"+l1);
+            }
+        });
     }
 
     public void sendTextMsg(Conversation conversation, TextMessageContent txtContent) {
@@ -490,5 +516,14 @@ public class MessageViewModel extends ViewModel implements OnReceiveMessageListe
         if (messageReadLiveData != null) {
             messageReadLiveData.postValue(readEntries);
         }
+    }
+
+    public void sendRedMessage(Conversation conversation, String num,String id) {
+
+        TypingMessageContent content = new TypingMessageContent(10);
+        sendMessage(conversation, content);
+
+        RedMessageContent redCon = new RedMessageContent("恭喜发财",num,id);
+        sendMessageCall(conversation, redCon);
     }
 }

@@ -7,16 +7,17 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+    <EditText
+        android:id="@+id/input_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="example ext" />
+        android:hint="红包扩展 输入数量" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Click to Hide" />
+        android:text="点击发送" />
 
 </LinearLayout>
