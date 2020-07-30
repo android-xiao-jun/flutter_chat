@@ -2,6 +2,7 @@ package com.example.FlutterChat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import java.util.Arrays;
 
@@ -14,6 +15,7 @@ import cn.wildfire.chat.app.main.SplashActivity;
 import cn.wildfire.chat.kit.conversationlist.ConversationListViewModel;
 import cn.wildfire.chat.kit.conversationlist.ConversationListViewModelFactory;
 import cn.wildfirechat.model.Conversation;
+import cn.wildfirechat.model.UnreadCount;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
@@ -43,6 +45,7 @@ public class PluginChatPlugin implements FlutterPlugin, MethodCallHandler, Event
     }
 
     public static void registerWith(Registrar registrar, FragmentActivity activity) {
+        Log.e("PluginChatPlugin", "registerWith ");
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "plugin_chat");
         channel.setMethodCallHandler(new PluginChatPlugin(registrar.context()));
 
@@ -51,14 +54,16 @@ public class PluginChatPlugin implements FlutterPlugin, MethodCallHandler, Event
 
 
         conversationListViewModel=new ViewModelProvider(activity,new ConversationListViewModelFactory(Arrays.asList(Conversation.ConversationType.Single, Conversation.ConversationType.Group, Conversation.ConversationType.Channel), Arrays.asList(0))).get(ConversationListViewModel.class);
-        conversationListViewModel.unreadCountLiveData().observe(activity, unreadCount -> {
-            if (unreadCount != null && unreadCount.unread > 0) {
-                sendNum(unreadCount.unread);
-            } else {
-                sendNum(0);
-            }
-        });
+        conversationListViewModel.unreadCountLiveData().observe(activity, PluginChatPlugin::setCount);
 
+    }
+
+    private static void setCount(UnreadCount unreadCount) {
+        if (unreadCount != null && unreadCount.unread > 0) {
+            sendNum(unreadCount.unread);
+        } else {
+            sendNum(0);
+        }
     }
 
     @Override
@@ -81,14 +86,16 @@ public class PluginChatPlugin implements FlutterPlugin, MethodCallHandler, Event
     }
 
     public static void sendNum(int Num) {
+        Log.e("PluginChatPlugin", "sendNum: "+Num);
         if(eventSink==null) return;
         eventSink.success("" + Num);
     }
 
     @Override
     public void onListen(Object arguments, EventChannel.EventSink events) {
+        Log.e("PluginChatPlugin", "onListen ");
         eventSink = events;
-
+        setCount(conversationListViewModel.unreadCountLiveData().getValue());
     }
 
     @Override
