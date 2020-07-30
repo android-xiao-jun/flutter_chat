@@ -48,6 +48,23 @@ android {
         ndk {
             abiFilters "armeabi-v7a", 'x86', 'x86_64' // ，'armeabi', 'arm64-v8a', 'x86', 'x86_64'
         }
+
+        manifestPlaceholders = [
+
+                MI_APP_ID      : "2882303761517722456",
+                MI_APP_KEY     : "5731772292456",
+
+                HMS_APP_ID     : "100221325",
+
+                MEIZU_APP_ID   : "113616",
+                MEIZU_APP_KEY  : "fcd886f51c144b45b87a67a28e2934d1",
+
+                VIVO_APP_ID    : "12918",
+                VIVO_APP_KEY   : "c42feb05-de6c-427d-af55-4f902d9e0a75",
+
+                OPPO_APP_KEY   : "16c6afe503b24259928e082ef01a6bf2",
+                OPPO_APP_SECRET: "16c6afe503b24259928e082ef01a6bf2"
+        ]
     }
 
     buildTypes {
@@ -83,18 +100,41 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
-    implementation 'q.rorbin:badgeview:1.1.3'
-    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 
+
+    implementation 'com.lqr.adapter:library:1.0.2'
+    implementation 'com.jaeger.statusbaruitl:library:1.3.5'
+
+    // wfc kit start
+    implementation 'q.rorbin:badgeview:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.3.0-alpha01'
     implementation 'com.google.android.material:material:1.3.0-alpha01'
-
-    def lifecycle_version = '2.2.0'
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation 'com.king.zxing:zxing-lite:1.1.1'
-
+    implementation 'cjt.library.wheel:camera:1.1.9'
+    implementation 'com.kyleduo.switchbutton:library:1.4.4'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.squareup.okio:okio:1.14.0'
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation 'org.webrtc:google-webrtc:1.0.30039'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    // ViewModel and LiveData
+    def lifecycle_version = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+    implementation 'com.king.zxing:zxing-lite:1.1.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.google.android:flexbox:2.0.1'
+
+    implementation 'com.tencent.map.geolocation:TencentLocationSdk-openplatform:7.2.6'
+
+    implementation 'com.huawei.hms:push:4.0.3.301'
+    implementation 'com.meizu.flyme.internet:push-internal:3.4.2@aar'
 
 
 }

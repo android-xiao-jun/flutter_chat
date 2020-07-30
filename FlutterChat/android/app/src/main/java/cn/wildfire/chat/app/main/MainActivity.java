@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.FlutterChat.PluginChatPlugin;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.king.zxing.Intents;
@@ -182,6 +183,8 @@ public class MainActivity extends WfcBaseActivity implements ViewPager.OnPageCha
             unreadMessageUnreadBadgeView.bindTarget(view);
         }
         unreadMessageUnreadBadgeView.setBadgeNumber(count);
+
+        PluginChatPlugin.sendNum(count);//通知flutter 消息数量
     }
 
     private void hideUnreadMessageBadgeView() {

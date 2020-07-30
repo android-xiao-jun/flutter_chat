@@ -4,7 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.FlutterChat.BuildConfig;
+import com.example.plugin_chat_example.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
